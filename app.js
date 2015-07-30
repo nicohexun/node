@@ -9,7 +9,7 @@ var routes = require('./src/routes/index');
 var users = require('./src/routes/users');
 
 var getUsers = require('./src/dao/userDao').getUsers;
-
+var getUsersByPool = require('./src/dao/userDao').getUsersByPool;
 
 var app = express();
 
@@ -62,4 +62,3 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-getUsers();
