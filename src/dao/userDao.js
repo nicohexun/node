@@ -1,17 +1,32 @@
+var Q = require('q');
 var connection = require("../db/mysql").connection;
 var pool = require("../db/mysql").pool;
 
-exports.getUsers = function() {
+
+exports.findUser = function (username, password, ep) {
     connection.connect();
 
-    connection.query('SELECT * from t_user', function(err, rows, fields) {
+    connection.query('select * from t_user where username=? and password = ?', [username, password], function (err, rows, fields) {
+        if (err) {
+            return next(err);
+        }
+        return ep.emit('done',rows.length > 0);
+    });
+
+    connection.end();
+};
+
+exports.getUsers = function () {
+    connection.connect();
+
+    connection.query('SELECT * from t_user', function (err, rows, fields) {
         if (err) throw err;
 
         console.log('Row count is:', rows.length);
-        rows.forEach(function(row) {
+        rows.forEach(function (row) {
             console.log('Data is:\n ', row);
         });
-        fields.forEach(function(field) {
+        fields.forEach(function (field) {
             console.log('Field name is: ', field.name);
         });
 
@@ -20,20 +35,20 @@ exports.getUsers = function() {
     connection.end();
 };
 
-exports.getUsersByPool = function() {
-    pool.getConnection(function(err, conn) {
+exports.getUsersByPool = function () {
+    pool.getConnection(function (err, conn) {
         // Use the connection
-        conn.query( 'SELECT * FROM t_user', function(err, rows, fields) {
+        conn.query('SELECT * FROM t_user', function (err, rows, fields) {
 
-            if(err) {
+            if (err) {
                 console.log('err: ', err);
             }
 
             console.log('Row count is:', rows.length);
-            rows.forEach(function(row) {
+            rows.forEach(function (row) {
                 console.log('Data is:\n ', row);
             });
-            fields.forEach(function(field) {
+            fields.forEach(function (field) {
                 console.log('Field name is: ', field.name);
             });
 
