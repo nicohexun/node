@@ -23,6 +23,9 @@ import path from 'path';
 
 var app = koa();
 
+//1
+//2
+
 // view engine setup
 app.set('views', path.join(__dirname, '/src/views'));
 app.set('view engine', 'ejs');
