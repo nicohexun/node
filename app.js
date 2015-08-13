@@ -14,7 +14,7 @@ var getUsersByPool = require('./src/dao/userDao').getUsersByPool;
 var db = require('./src/db/mysql').connection;
 
 var app = express();
-//add commit message for test
+
 // view engine setup
 app.set('views', path.join(__dirname, '/src/views'));
 app.set('view engine', 'ejs');
