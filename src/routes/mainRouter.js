@@ -7,8 +7,16 @@ var userDao = require('../dao/userDao');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.param('a', function(req, res, next) {
+    console.log('render a parameter');
+    next();
+});
+router.get('/name', function(req, res, next) {
     res.render('index', { title: 'Express' });
+});
+router.get('/name/:a/:b/c/d/', function(req, res, next) {
+    console.log('get a parameter');
+    res.render('index', { title: req.params.a + ' @ ' + req.params.b });
 });
 router.post('/login', function(req, res, next) {
     var username = req.body.username;

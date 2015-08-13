@@ -1,19 +1,27 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+//var express = require('express');
+//var path = require('path');
+//var favicon = require('serve-favicon');
+//var logger = require('morgan');
+//var cookieParser = require('cookie-parser');
+//var bodyParser = require('body-parser');
+//
+//var mainRouter = require('./src/routes/mainRouter');
+//var users = require('./src/routes/users');
 
-var mainRouter = require('./src/routes/mainRouter');
-var users = require('./src/routes/users');
+import koa from 'koa';
+import path from 'path';
 
-var getUsers = require('./src/dao/userDao').getUsers;
-var getUsersByPool = require('./src/dao/userDao').getUsersByPool;
+/*
+ var User = require('./src/model/user').User;
+ var Authorization = require('./src/model/authorization').Authorization;
 
-var db = require('./src/db/mysql').connection;
+ var getUsers = require('./src/dao/userDao').getUsers;
+ var getUsersByPool = require('./src/dao/userDao').getUsersByPool;
 
-var app = express();
+ var db = require('./src/db/mysql').connection;
+ */
+
+var app = koa();
 
 // view engine setup
 app.set('views', path.join(__dirname, '/src/views'));
