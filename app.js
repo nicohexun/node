@@ -15,6 +15,8 @@ var db = require('./src/db/mysql').connection;
 
 var app = express();
 
+//1
+
 // view engine setup
 app.set('views', path.join(__dirname, '/src/views'));
 app.set('view engine', 'ejs');
